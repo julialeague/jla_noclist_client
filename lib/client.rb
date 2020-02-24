@@ -86,8 +86,6 @@ end
 if $0 == __FILE__
   begin
     client = Client.new
-    require 'pry'
-    binding.pry
     auth_token = client.authorize
     client.users_list(auth_token)
   rescue Client::ExitError
