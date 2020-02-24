@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/badsec/client'
+
+# This is executable program. Initializes the client class and retrieves an
+# auth token from the BADSEC authorization endpoint.
+# Then retrieves the users list with the valid auth token.
+# Exits without the list if [Client::ExitError] is raised.
+begin
+  client = Badsec::Client.new
+  auth_token = client.authorize
+  client.users_list(auth_token)
+  exit(0)
+rescue Badsec::Client::ExitError
+  @error_log.error(
+    'The service has failed to respond successfully. Please try again later.'
+  )
+  exit(1)
+end

@@ -92,21 +92,3 @@ module Badsec
     end
   end
 end
-
-# This is the main program. Initializes the client class and retrieves an
-# auth token from the BADSEC authorization endpoint.
-# Then retrieves the users list with the valid auth token.
-# Exits without the list if [Client::ExitError] is raised.
-if $PROGRAM_NAME == __FILE__
-  begin
-    client = Badsec::Client.new
-    auth_token = client.authorize
-    client.users_list(auth_token)
-    exit(0)
-  rescue Badsec::Client::ExitError
-    @error_log.error(
-      'The service has failed to respond successfully. Please try again later.'
-    )
-    exit(1)
-  end
-end
