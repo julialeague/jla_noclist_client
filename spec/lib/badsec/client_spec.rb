@@ -61,12 +61,11 @@ RSpec.describe Badsec::Client do
           HTTP::Error
         )
       rescue ExitError
-
         expect(client.authorize).to raise_error(Client::ExitError)
 
         expect { client.authorize }.to output(
           /There was a problem with the request. Retrying.../
-        ).to_stderr_from_any_process
+        ).to_stderr
       end
     end
   end
@@ -93,7 +92,7 @@ RSpec.describe Badsec::Client do
 
         expect { client.users_list(auth) }.to output(
           /['1234', '5678', '9101112', '13141516']/
-        ).to_stdout_from_any_process
+        ).to_stdout
       end
     end
 
@@ -127,7 +126,7 @@ RSpec.describe Badsec::Client do
         ).to_stderr_from_any_process
 
         expect { client.users_list('something') }.to output
-          .to_stdout_from_any_process
+          .to_stdout
       end
 
       it 'handles service errors by retrying' do
@@ -137,10 +136,10 @@ RSpec.describe Badsec::Client do
       rescue ExitError
         expect { client.users_list('something') }.to output(
           /There was a problem with the request. Retrying.../
-        ).to_stderr_from_any_process
+        ).to_stderr
 
         expect { client.users_list('something') }.to output
-          .to_stdout_from_any_process
+          .to_stdout
       end
     end
   end

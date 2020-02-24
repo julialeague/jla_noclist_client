@@ -12,7 +12,7 @@ begin
   client.users_list(auth_token)
   exit(0)
 rescue Badsec::Client::ExitError
-  @error_log.error(
+  STDERR.puts(
     'The service has failed to respond successfully. Please try again later.'
   )
   exit(1)

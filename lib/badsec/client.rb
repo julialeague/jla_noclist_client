@@ -13,7 +13,6 @@ module Badsec
     class ExitError < StandardError; end
 
     def initialize
-      @logger = Logger.new(STDOUT)
       @error_log = Logger.new(STDERR)
       @retries = 0
       # Build an HTTP::Client with default request options
@@ -43,7 +42,7 @@ module Badsec
 
     # Calls the BADSEC API's users list endpoint
     #
-    # @param [String] auth_token The SHA256-hashed auth token for the service
+    # @param [String] auth_token The auth token for the service
     #
     # Logs the list of users to STDOUT
     #
@@ -54,7 +53,7 @@ module Badsec
       ).get(NOCLIST_URI + '/users')
 
       if response.status.success?
-        @logger.info(JSON.parse(response.to_s.split("\n").to_json))
+        puts response.to_s.split("\n").to_json
         @retries = 0
       else
         handle_error

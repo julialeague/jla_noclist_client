@@ -8,7 +8,7 @@ This is a Ruby client script written to perform the AdHoc homework specified her
 
 1. Ensure you have your local Ruby environment set up to use `ruby-2.6.5` and the bundler gem.
 
-1. Pull down the project and navigate to `badsec_client`
+1. Pull down the project
 
 1. In your command console, run:
 	```unix
