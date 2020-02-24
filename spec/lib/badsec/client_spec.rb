@@ -18,7 +18,7 @@ RSpec.describe Badsec::Client do
       end
 
       before do
-        allow_any_instance_of(HTTP::Client).to receive(:get).and_return(
+        allow_any_instance_of(HTTP::Client).to receive(:head).and_return(
           response
         )
       end
@@ -30,7 +30,7 @@ RSpec.describe Badsec::Client do
 
     context 'when the request is not successful' do
       before do
-        allow_any_instance_of(HTTP::Client).to receive(:get).and_return(
+        allow_any_instance_of(HTTP::Client).to receive(:head).and_return(
           response, response, success_response
         )
       end
@@ -57,7 +57,7 @@ RSpec.describe Badsec::Client do
       end
 
       it 'handles service errors by retrying' do
-        allow_any_instance_of(HTTP::Client).to receive(:get).and_raise(
+        allow_any_instance_of(HTTP::Client).to receive(:head).and_raise(
           HTTP::Error
         )
       rescue ExitError

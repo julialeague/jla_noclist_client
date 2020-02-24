@@ -25,7 +25,9 @@ module Badsec
     #
     # @return [String, nil] the auth token
     def authorize
-      response = @http.get(NOCLIST_URI + '/auth')
+      # Only retrieve the header for this API call,
+      # the body contains nothing of use
+      response = @http.head(NOCLIST_URI + '/auth')
 
       if response.status.success?
         @retries = 0
@@ -100,6 +102,7 @@ if $PROGRAM_NAME == __FILE__
     client = Badsec::Client.new
     auth_token = client.authorize
     client.users_list(auth_token)
+    exit(0)
   rescue Badsec::Client::ExitError
     @error_log.error(
       'The service has failed to respond successfully. Please try again later.'
