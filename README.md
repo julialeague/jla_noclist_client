@@ -8,12 +8,12 @@ This is a Ruby client script written to perform the AdHoc homework specified her
 
 1. Ensure you have your local Ruby environment set up to use `ruby-2.6.5` and the bundler gem.
 
-1. Pull down the project and navigate to `jla_noclist_client`
+1. Pull down the project and navigate to `badsec_client`
 
 1. In your command console, run:
 	```unix
 	bundle install
-	ruby lib/client.rb
+	ruby lib/badsec/client.rb
 	```
 
 The user list output will appear in the console if the script runs successfully. Otherwise, there will be error logs, and the script will exit after unsuccessfully retrying either of the two requests 2 times.
